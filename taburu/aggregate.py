@@ -1,6 +1,6 @@
 import abc
-from .table import ParameterTable, HashedParameterArray
-from .event import ParametersAdded
+from taburu.table import ParameterTable, HashedParameterArray
+from taburu.event import ParametersAdded
 
 
 class Aggregate(abc.ABC):

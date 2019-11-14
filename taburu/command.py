@@ -1,5 +1,5 @@
-from .state import uProjectState
-from .event import Event, ParametersAdded, MethodAdded
+from taburu.state import uProjectState
+from taburu.event import Event, ParametersAdded, MethodAdded
 from monty.json import MSONable
 
 

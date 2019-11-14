@@ -2,6 +2,7 @@
 
 import unittest
 from monty.tempfile import ScratchDir
+from taburu.channel import FileChannel
 
 
 class FileChannelTest(unittest.TestCase):

@@ -1,6 +1,6 @@
 import abc
-from .event import ParametersAdded, MethodAdded
-from .table import ParameterTable
+from taburu.event import ParametersAdded, MethodAdded
+from taburu.table import ParameterTable
 from indexed import IndexedOrderedDict
 
 
