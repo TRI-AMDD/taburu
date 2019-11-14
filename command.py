@@ -47,3 +47,7 @@ class uProjectCommandProcessor(object):
             if self.state.apply(method_added):
                 self.publish(method_added)
         return True
+
+    def run(self):
+        for command in self.input_channel.subscribe():
+            self.process_command(command)
