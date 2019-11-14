@@ -1,6 +1,6 @@
 import abc
 from .table import ParameterTable, HashedParameterArray
-from .events import ParametersAdded
+from .event import ParametersAdded
 
 
 class Aggregate(abc.ABC):

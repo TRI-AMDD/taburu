@@ -24,15 +24,15 @@ class ParametersAdded(Event, MSONable, time=None):
 
 
 class MethodAdded(Event, MSONable):
-    def __init__(self, name, parameter_names, time=None):
+    def __init__(self, name, parameter_indices, time=None):
         self.name = name
-        self.parameter_names = parameter_names
+        self.parameter_indices = parameter_indices
         super(Event, self).__init__(time)
 
     def as_dict(self):
         return {
             "name": self.name,
-            "parameters": self.parameter_names,
+            "parameters": self.parameter_indices,
             "time": self._time
         }
 
