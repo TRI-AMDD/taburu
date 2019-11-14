@@ -1,5 +1,7 @@
 import abc
-from monty.json import jsanitize
+import time
+import json
+from monty.json import jsanitize, MontyDecoder
 import threading
 
 # This should probably be on a per-file basis
@@ -23,15 +25,19 @@ class FileChannel(Channel):
             f.write(data)
         CHANNEL_THREAD_LOCK.release()
 
-    def subscribe(self, poll_time=10):
+    def subscribe(self, iterations=None, poll_time=10):
+        times_polled = 0
         with open(self._filename, "r+") as f:
             while True:
-                while f.tell():
-                    print('Next')
-                    yield f.next()
-
-
-
+                raw = f.readline()
+                while raw:
+                    yield json.loads(raw, cls=MontyDecoder)
+                    raw = f.readline()
+                times_polled += 1
+                if iterations is not None and times_polled > iterations:
+                    break
+                else:
+                    time.sleep(poll_time)
 
 
 class KinesisChannel(Channel):
