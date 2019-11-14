@@ -9,7 +9,7 @@ class Event(abc.ABC):
 
 
 # TODO: more descriptive name, populate space?
-class ParametersAdded(Event, MSONable, time=None):
+class ParametersAdded(Event, MSONable):
     def __init__(self, table_name, parameters, time=None):
         self.table_name = table_name
         self.parameters = parameters
@@ -17,6 +17,8 @@ class ParametersAdded(Event, MSONable, time=None):
 
     def as_dict(self):
         return {
+            "@class": self.__class__.__name__,
+            "@module": self.__class__.__module__,
             "table_name": self.table_name,
             "parameters": self.parameters,
             "time": self._time
@@ -31,6 +33,8 @@ class MethodAdded(Event, MSONable):
 
     def as_dict(self):
         return {
+            "@class": self.__class__.__name__,
+            "@module": self.__class__.__module__,
             "name": self.name,
             "parameters": self.parameter_indices,
             "time": self._time

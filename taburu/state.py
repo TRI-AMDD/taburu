@@ -10,7 +10,7 @@ class State(abc.ABC):
         pass
 
 
-class uProjectState(State):
+class TaburuState(State):
     def __init__(self):
         self.parameters = IndexedOrderedDict()
         self.methods = IndexedOrderedDict()
@@ -29,5 +29,17 @@ class uProjectState(State):
                 return False
         return True
 
+    def __str__(self):
+        return self.__repr__()
 
-
+    def __repr__(self):
+        parameters = ['{} {}: {}'.format(n, parameter_name, len(table))
+                      for n, (parameter_name, table) in
+                      enumerate(self.parameters.items())]
+        methods = ["{}: {}".format(method_name, parameters)
+                   for method_name, parameters in self.methods.items()]
+        output = "Parameters:\n   "
+        output += "\n   ".join(parameters)
+        output += "\nMethods:\n   "
+        output += "\n   ".join(methods)
+        return output

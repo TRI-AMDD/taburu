@@ -19,10 +19,11 @@ class FileChannel(Channel):
         self._filename = filename
 
     def publish(self, event):
-        data = jsanitize(event, strict=True)
+        data = json.dumps(jsanitize(event, strict=True))
         CHANNEL_THREAD_LOCK.acquire()
         with open(self._filename, "a+") as f:
             f.write(data)
+            f.write("\n")
         CHANNEL_THREAD_LOCK.release()
 
     def subscribe(self, iterations=None, poll_time=10):

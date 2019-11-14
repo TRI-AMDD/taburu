@@ -1,11 +1,22 @@
-from taburu.state import uProjectState
+from taburu.state import TaburuState
 from taburu.event import Event, ParametersAdded, MethodAdded
 from monty.json import MSONable
 
 
-class AddParameterCommanded(ParametersAdded):
-    """The event schema is the same aside from the name"""
-    pass
+class AddParameterCommanded(Event, MSONable):
+    def __init__(self, table_name, parameters, time=None):
+        self.table_name = table_name
+        self.parameters = parameters
+        super(AddParameterCommanded, self).__init__(time)
+
+    def as_dict(self):
+        return {
+            "@class": self.__class__.__name__,
+            "@module": self.__class__.__module__,
+            "table_name": self.table_name,
+            "parameters": self.parameters,
+            "time": self._time
+        }
 
 
 class AddMethodCommanded(Event, MSONable):
@@ -15,16 +26,25 @@ class AddMethodCommanded(Event, MSONable):
         self.parameter_names = parameter_names
         super(AddMethodCommanded, self).__init__(time)
 
+    def as_dict(self):
+        return {
+            "@class": self.__class__.__name__,
+            "@module": self.__class__.__module__,
+            "name": self.name,
+            "parameter_names": self.parameter_names,
+            "time": self._time
+        }
 
-class uProjectCommandProcessor(object):
-    def __init__(self, input_channel, output_channel=None,
+
+class TaburuCommandProcessor(object):
+    def __init__(self, command_channel, event_channel=None,
                  state=None):
-        self.state = state or uProjectState()
-        self.input_channel = input_channel
-        self.output_channel = output_channel
+        self.state = state or TaburuState()
+        self.command_channel = command_channel
+        self.event_channel = event_channel
 
     def publish(self, event):
-        self.output_channel.publish(event)
+        self.event_channel.publish(event)
 
     def process_command(self, command):
         if isinstance(command, AddParameterCommanded):
@@ -48,6 +68,9 @@ class uProjectCommandProcessor(object):
                 self.publish(method_added)
         return True
 
-    def run(self):
-        for command in self.input_channel.subscribe():
+    def run(self, iterations=None, poll_time=10):
+        commands = self.command_channel.subscribe(
+            iterations=iterations, poll_time=poll_time)
+        for command in commands:
             self.process_command(command)
+            print(self.state)
