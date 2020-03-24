@@ -12,7 +12,7 @@ import re
 import subprocess
 import datetime
 
-from camd import __version__ as CURRENT_VER
+from taburu import __version__ as CURRENT_VER
 
 NEW_VER = datetime.datetime.today().strftime("%Y.%-m.%-d")
 
@@ -32,13 +32,13 @@ def publish(ctx):
 @task
 def set_ver(ctx):
     lines = []
-    with open("camd/__init__.py", "rt") as f:
+    with open("taburu/__init__.py", "rt") as f:
         for l in f:
             if l.startswith("__version__"):
                 lines.append('__version__ = "%s"' % NEW_VER)
             else:
                 lines.append(l.rstrip())
-    with open("camd/__init__.py", "wt") as f:
+    with open("taburu/__init__.py", "wt") as f:
         f.write("\n".join(lines))
 
     lines = []
@@ -89,7 +89,7 @@ def release_github(ctx):
         "prerelease": False
     }
     response = requests.post(
-        "https://api.github.com/repos/ToyotaResearchInstitute/camd/releases",
+        "https://api.github.com/repos/TRI-AMDD/taburu/releases",
         data=json.dumps(payload),
         headers={"Authorization": "token " + os.environ["GITHUB_RELEASES_TOKEN"]})
     print(response.text)
@@ -119,17 +119,17 @@ def update_changelog(ctx):
 @task
 def release(ctx, notest=False, nover=False):
     """
-    Run full sequence for releasing camd.
+    Run full sequence for releasing taburu.
 
     :param ctx:
     :param notest: Whether to skip tests.
     :param notest: Whether to skip autoversion (e. g. if tagging version).
     """
-    ctx.run("rm -r dist build camd.egg-info", warn=True)
+    ctx.run("rm -r dist build taburu.egg-info", warn=True)
     if not nover:
         set_ver(ctx)
     if not notest:
-        ctx.run("pytest camd")
+        ctx.run("pytest taburu")
     publish(ctx)
     merge_stable(ctx)
     release_github(ctx)

@@ -1,3 +1,4 @@
+# Copyright (c) 2019 Toyota Research Institute
 import abc
 import time
 import json

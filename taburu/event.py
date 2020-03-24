@@ -1,3 +1,4 @@
+# Copyright (c) 2019 Toyota Research Institute
 import abc
 from datetime import datetime
 from monty.json import MSONable

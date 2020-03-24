@@ -1,8 +1,10 @@
+# Copyright (c) 2019 Toyota Research Institute
+
 from setuptools import setup, find_packages
 
 setup(
     name='taburu',
-    version='0.1',
+    version="2020.3.24",
     packages=find_packages(),
     url='',
     license='',

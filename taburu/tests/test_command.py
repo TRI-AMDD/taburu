@@ -1,4 +1,4 @@
-#  Copyright (c) 2019 Toyota Research Institute.  All rights reserved.
+# Copyright (c) 2019 Toyota Research Institute.  All rights reserved.
 
 import unittest
 from monty.tempfile import ScratchDir

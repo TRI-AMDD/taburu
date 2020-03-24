@@ -1,3 +1,4 @@
+# Copyright (c) 2019 Toyota Research Institute
 import abc
 from taburu.event import ParametersAdded, MethodAdded
 from taburu.table import ParameterTable

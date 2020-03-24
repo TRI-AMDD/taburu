@@ -1,3 +1,4 @@
+# Copyright (c) 2019 Toyota Research Institute
 from taburu.state import TaburuState
 from taburu.event import Event, ParametersAdded, MethodAdded
 from monty.json import MSONable

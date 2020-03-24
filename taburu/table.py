@@ -1,4 +1,4 @@
-#  Copyright (c) 2019 Toyota Research Institute
+# Copyright (c) 2019 Toyota Research Institute
 """
 This module is intended to create a parameter table associated
 with agent testing, e. g. to categorize Agents via numerical
