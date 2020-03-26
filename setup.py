@@ -13,7 +13,7 @@ to ensure that prior methods can be accounted for when doing new experiments.
 """
 setup(
     name='taburu',
-    version="2020.3.24",
+    version="2020.3.24-post0",
     packages=find_packages(),
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
@@ -24,9 +24,9 @@ setup(
     author_email='joseph.montoya@tri.global',
     maintainer='joseph.montoya',
     maintainer_email='joseph.montoya@tri.global',
-    install_requires=["monty==2.0.6",
+    install_requires=["monty>=3.0.2",
                       "indexed.py==0.0.1",
-                      "tqdm==4.31.1",
+                      "tqdm>=4.31.1",
                       ],
     classifiers=[
           "Programming Language :: Python :: 3",
