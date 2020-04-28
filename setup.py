@@ -25,7 +25,7 @@ setup(
     maintainer='joseph.montoya',
     maintainer_email='joseph.montoya@tri.global',
     install_requires=["monty>=3.0.2",
-                      "indexed.py==0.0.1",
+                      "indexed==1.0.0",
                       "tqdm>=4.31.1",
                       ],
     classifiers=[
