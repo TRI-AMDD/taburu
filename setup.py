@@ -13,7 +13,7 @@ to ensure that prior methods can be accounted for when doing new experiments.
 """
 setup(
     name='taburu',
-    version="2020.3.26",
+    version="2020.4.27",
     packages=find_packages(),
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
